@@ -145,7 +145,7 @@ function UserCard({ userData = {} }) {
   ]
 
   return (
-    <div className='max-w-[1280px] mx-auto gap-4 rounded-md shadow-md  text-white'>
+    <div className='max-w-[1280px] h-auto mx-auto gap-4 rounded-md shadow-md  text-white'>
       <div className='flex flex-col gap-2 p-8 justify-center bg-slate-900 items-center' >
         <img src={avatar_url} alt="GitHub Avatar" className='w-32 h-32 rounded-full m-auto shadow-md' />
         <span className='font-bold text-2xl'>{name}</span>
@@ -154,13 +154,13 @@ function UserCard({ userData = {} }) {
       </div>
 
       <div className="w-full p-8 flex flex-col gap-8 justify-center items-center">
-        <div className="w-full flex justify-center gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center">
           {stats.map((stat) => {
             return <Card1 {...stat} />
           })}
         </div>
 
-        <div className='w-full gap-y-8 grid grid-cols-2 grid-rows-1 gap-x-16 border-2'>
+        <div className='w-full grid gap-y-2 grid-cols-1 md:gap-y-8  md:grid-cols-2 grid-rows-1 gap-x-16 border-2'>
           {[...details].map((detail) => {
             return <Card2 {...detail} />
           })}
