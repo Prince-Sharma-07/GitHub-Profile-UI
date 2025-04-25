@@ -37,11 +37,6 @@ import { useState } from 'react'
 //   "updated_at": "2025-04-18T12:52:56Z"
 // }
 
-// function effectCallbackFn(){
-//   console.log("I am called")
-// }
-
-
 export default function App() {
   const [userData, setUserData] = useState("")
   const [error, setError] = useState("")
@@ -50,31 +45,29 @@ export default function App() {
     setUserData("")
     setError("")
     try {
-      if(username){
+      if (username) {
         const response = await fetch(`https://api.github.com/users/${username}`)
         console.log(response)
         if (!response.ok) {
-           throw new Error("User Not Found");       
+          throw new Error("User Not Found");
         }
         const data = await response.json()
         setUserData(data ?? "")
-     }
+      }
     } catch (error) {
       setError(error.message ?? "User not found")
     }
   }
 
   function handleSubmit(input) {
-     getUserData(input)
+    getUserData(input)
   }
 
   return (
     <div className=' App '>
-
       <UserInput handleSubmit={handleSubmit} />
       {error ? <ErrorBox error={error} /> : null}
       {userData && !error ? <UserCard userData={userData} /> : null}
-
     </div>
   )
 }
@@ -95,8 +88,8 @@ function UserInput({ handleSubmit }) {
       e.preventDefault()
       return handleSubmit(InputValue, e)
     }}
-      className='max-w-[1280px] mx-auto flex gap-4 p-4 bg-slate shadow-md rounded-md m-auto '>
-      <input value={InputValue} onChange={(e) => setInputValue(e.target.value)} type="search" placeholder='Enter Your Username...' autoFocus className='flex-1 border-gray-200 rounded-md px-4 py-2 border-2' />
+      className='max-w-[1280px] mx-auto flex gap-4 p-4 bg-slate-300 shadow-md rounded-md m-auto '>
+      <input value={InputValue} onChange={(e) => setInputValue(e.target.value)} type="search" placeholder='Enter Your Username...' autoFocus className='flex-1 border-gray-200 rounded-md px-4 py-2 bg-white' />
       <button type="submit" className='bg-green-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer'>Search</button>
     </form>
   )
@@ -155,8 +148,8 @@ function UserCard({ userData = {} }) {
 
       <div className="w-full p-8 flex flex-col gap-8 justify-center items-center">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center">
-          {stats.map((stat) => {
-            return <Card1 {...stat} />
+          {stats.map((stat)=>{
+              return <Card1 {...stat} />
           })}
         </div>
 
@@ -180,10 +173,9 @@ function UserCard({ userData = {} }) {
   )
 }
 
-function Card1({ label, value }) {
-
+function Card1({value , label}) {
   return (
-    <div className="p-4 h-22 w-28 flex flex-col gap-1 rounded-2xl border-2 items-center text-black">
+    <div className='p-4 h-22 w-28 flex flex-col gap-1 rounded-2xl border-2 items-center text-black'>
       <span >{value}</span>
       <span >{label}</span>
     </div>
